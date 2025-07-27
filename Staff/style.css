@@ -1,0 +1,190 @@
+/* Importation des polices Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+    --primary-color: #3498db; /* Bleu */
+    --secondary-color: #2c3e50; /* Bleu foncé presque noir */
+    --accent-color: #e74c3c; /* Rouge pour les alertes */
+    --bg-light: #ecf0f1; /* Gris clair */
+    --bg-dark: #bdc3c7; /* Gris moyen */
+    --text-color: #333;
+    --card-bg: #fff;
+    --border-color: #ddd;
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    background: var(--card-bg);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+/* Header / Hero Section */
+.hero {
+    text-align: center;
+    padding: 40px 0;
+    margin-bottom: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    color: white; /* S'assurer que le texte du titre est blanc */
+}
+
+.hero .subtitle {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: var(--secondary-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+/* Section Cards */
+.section-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 30px;
+}
+
+/* Collapsible Items */
+.collapsible-item {
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Important for transition */
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.collapsible-header {
+    background-color: var(--bg-light);
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: var(--secondary-color);
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.collapsible-header:hover {
+    background-color: var(--bg-dark);
+}
+
+.collapsible-header .arrow {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.collapsible-header.active .arrow {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    padding: 0 20px; /* Padding top/bottom is managed by max-height */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+    background-color: var(--card-bg);
+}
+
+.collapsible-content.active {
+    max-height: 500px; /* Grande valeur pour couvrir le contenu */
+    padding: 20px;
+}
+
+.collapsible-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.collapsible-content ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.collapsible-content ul li::before {
+    content: '•';
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Content Box (for non-collapsible sections) */
+.content-box {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Icons */
+.icon {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.hero .icon {
+    color: white;
+}
+
+/* Highlights */
+.highlight {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    font-size: 0.9em;
+}
