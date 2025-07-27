@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions d'Utilisation - ConcordiaBot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark-blue: #1A202C; /* Deep charcoal blue */
+            --secondary-light-blue: #4299E1; /* Muted vibrant blue */
+            --accent-green: #38A169; /* Subtle green for success/highlight */
+            --background-light: #F7FAFC; /* Off-white / very light grey */
+            --card-background: #FFFFFF; /* Pure white for content cards */
+            --text-main: #2D3748; /* Dark grey for main text */
+            --text-secondary: #718096; /* Medium grey for secondary text */
+            --border-color: #E2E8F0; /* Light grey border */
+            --shadow-subtle: rgba(26, 32, 44, 0.05); /* Very light shadow */
+            --shadow-medium: rgba(26, 32, 44, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Subtle background patterns */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(66, 153, 225, 0.03) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 90%, rgba(56, 161, 105, 0.03) 0%, transparent 20%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .header-section {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-dark-blue) 0%, #2D3748 100%);
+            color: white;
+            padding: 80px 20px 100px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="%23FFFFFF" opacity="0.1" /></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)" /></svg>');
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .header-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: scaleIn 0.7s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .header-section p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2em;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            animation: fadeInText 0.7s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .main-content-area {
+            display: flex;
+            width: 100%;
+            max-width: 1400px; /* Wider layout */
+            margin-top: -60px; /* Overlap with header */
+            padding: 0 40px; /* Increased padding */
+            box-sizing: border-box;
+            gap: 40px; /* Consistent gap */
+            align-items: flex-start;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content-card {
+            flex-grow: 1;
+            background-color: var(--card-background);
+            padding: 60px; /* Generous padding */
+            border-radius: 18px; /* Smooth rounded corners */
+            box-shadow: 0 15px 50px var(--shadow-subtle); /* More prominent but subtle shadow */
+            animation: fadeInUpContent 0.9s ease-out 0.4s forwards;
+            opacity: 0;
+            min-width: 0;
+            position: relative;
+        }
+
+        .sidebar-navigation {
+            position: sticky;
+            top: 40px; /* Adjusted sticky position */
+            width: 320px; /* Slightly wider sidebar */
+            padding: 40px 30px; /* Generous padding */
+            background-color: var(--card-background);
+            border-radius: 18px;
+            box-shadow: 0 8px 30px var(--shadow-subtle);
+            align-self: flex-start;
+            animation: fadeInRightSidebar 0.9s ease-out 0.6s forwards;
+            opacity: 0;
+            max-height: calc(100vh - 80px); /* Adjust max-height */
+            overflow-y: auto;
+            -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
+
+        .sidebar-navigation::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome/Safari */
+        }
+
+        .sidebar-navigation h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6em;
+            color: var(--primary-dark-blue);
+            margin-top: 0;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            font-weight: 700;
+        }
+
+        .sidebar-navigation h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-light-blue);
+        }
+
+        .sidebar-navigation ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-navigation ul li {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .sidebar-navigation ul li a {
+            display: block;
+            padding: 12px 18px;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease-out;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .sidebar-navigation ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-light-blue) 0%, var(--accent-green) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+        }
+
+        .sidebar-navigation ul li a:hover {
+            color: white;
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+        }
+
+        .sidebar-navigation ul li a:hover::before {
+            transform: translateX(0%);
+        }
+
+        .sidebar-navigation ul li a.active {
+            background: linear-gradient(90deg, var(--secondary-light-blue) 0%, var(--accent-green) 100%);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(66, 153, 225, 0.4);
+            transform: translateX(10px);
+            pointer-events: none; /* Make active link non-clickable */
+        }
+
+        .content-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: var(--primary-dark-blue);
+            margin-top: 0; /* Reset top margin as section starts with it */
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+            font-weight: 700;
+            scroll-margin-top: 100px; /* Offset for sticky header */
+        }
+
+        .content-card h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-light-blue);
+            transition: width 0.3s ease-out;
+        }
+
+        .content-card h2:hover::after {
+            width: 100px;
+        }
+
+        .content-card p {
+            margin-bottom: 25px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        /* Enforce bold for strong tags */
+        strong {
+            font-weight: 700;
+            color: var(--text-main); /* Ensure it's darker than secondary text */
+        }
+
+        .content-card ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 35px;
+        }
+
+        .content-card ul li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+        }
+
+        .content-card ul li:hover {
+            transform: translateX(5px);
+            color: var(--text-main);
+        }
+
+        .content-card ul li::before {
+            content: '•'; /* Simple dot for a cleaner look */
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4em;
+            color: var(--accent-green); /* Green accent dot */
+            position: absolute;
+            left: 0;
+            top: 0;
+            line-height: 1; /* Align vertically */
+        }
+
+        .content-card a {
+            color: var(--secondary-light-blue);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .content-card a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--accent-green);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .content-card a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .content-card a:hover {
+            color: var(--primary-dark-blue);
+            transform: translateY(-2px);
+        }
+
+        code {
+            background-color: #EDF2F7; /* Lighter background for code */
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace; /* Professional monospace font */
+            font-size: 0.9em;
+            color: #C05621; /* Orange-brown for code */
+            border: 1px solid #E2E8F0;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 60px 0;
+        }
+
+        .last-updated {
+            text-align: right;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Animations */
+        @keyframes slideInFromTop {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUpContent {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRightSidebar {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-content-area {
+                flex-direction: column;
+                margin-top: -40px;
+                padding: 0 30px;
+            }
+            .content-card {
+                padding: 40px;
+            }
+            .sidebar-navigation {
+                position: static;
+                width: 100%;
+                max-height: none;
+                overflow-y: visible;
+                padding: 30px;
+            }
+            .header-section {
+                padding: 60px 20px 80px;
+            }
+            .header-section h1 {
+                font-size: 3.5em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 50px 15px 70px;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+            .header-section h1 {
+                font-size: 2.8em;
+            }
+            .header-section p {
+                font-size: 1.1em;
+            }
+            .main-content-area {
+                padding: 0 20px;
+                margin-top: -30px;
+                gap: 30px;
+            }
+            .content-card {
+                padding: 30px;
+                border-radius: 15px;
+            }
+            .content-card h2 {
+                font-size: 2em;
+                margin-bottom: 25px;
+                scroll-margin-top: 80px;
+            }
+            .content-card h2::after {
+                width: 50px;
+                height: 3px;
+            }
+            .sidebar-navigation {
+                padding: 25px;
+                border-radius: 15px;
+            }
+            .sidebar-navigation h3 {
+                font-size: 1.4em;
+                margin-bottom: 20px;
+            }
+            .sidebar-navigation ul li a {
+                padding: 10px 15px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-section {
+                padding: 40px 10px 60px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+            .header-section h1 {
+                font-size: 2.2em;
+                letter-spacing: 1px;
+            }
+            .header-section p {
+                font-size: 1em;
+            }
+            .main-content-area {
+                padding: 0 15px;
+                gap: 20px;
+            }
+            .content-card {
+                padding: 25px;
+                border-radius: 12px;
+            }
+            .content-card h2 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            .content-card p {
+                font-size: 0.95em;
+                margin-bottom: 20px;
+            }
+            .content-card ul li {
+                padding-left: 30px;
+                font-size: 0.9em;
+            }
+            .sidebar-navigation {
+                padding: 20px;
+            }
+            .sidebar-navigation h3 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+            .sidebar-navigation ul li a {
+                font-size: 0.85em;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <h1><strong>Conditions d'Utilisation de ConcordiaBot</strong></h1>
+        <p>Votre guide complet pour une utilisation harmonieuse de notre service</p>
+    </div>
+
+    <div class="main-content-area">
+        <main class="content-card">
+            <h2 id="presentation"><strong>1. Présentation du Service</strong></h2>
+            <p><strong>ConcordiaBot</strong> est un bot Discord développé en Python, conçu exclusivement pour les membres du serveur <strong>Concordia</strong>. Il a été créé pour améliorer et fluidifier certaines interactions au sein de notre communauté.</p>
+            <p>Le bot propose deux fonctionnalités principales destinées à enrichir votre expérience :</p>
+            <ul>
+                <li>La gestion intuitive des <strong>annonces</strong>, permettant de consulter et de retrouver facilement les informations importantes.</li>
+                <li>La <strong>recherche</strong> rapide d’annonces déjà publiées par les membres, pour ne jamais perdre une information.</li>
+            </ul>
+            <p><strong>ConcordiaBot</strong> s'efforce d'être disponible quasiment <strong>24h/24</strong> et <strong>7j/7</strong>, avec des interruptions rares et nécessaires pour des opérations de maintenance planifiées ou en cas d'incident technique imprévu. Nous nous engageons à minimiser ces perturbations pour garantir une disponibilité maximale.</p>
+
+            <hr>
+
+            <h2 id="acces-service"><strong>2. Accès et Disponibilité</strong></h2>
+            <p>L'utilisation de <strong>ConcordiaBot</strong> est ouverte et facilitée pour <strong>tous les membres du serveur Concordia</strong>. Notre objectif est de rendre ses fonctionnalités accessibles sans aucune barrière.</p>
+            <p>De ce fait, aucune action particulière n’est requise pour accéder à ses fonctions : vous n'avez besoin ni d'une inscription préalable, ni d'un rôle spécial, ni d'une validation manuelle. Dès votre adhésion au serveur, <strong>ConcordiaBot</strong> est à votre disposition.</p>
+
+            <hr>
+
+            <h2 id="regles-utilisation"><strong>3. Règles d'Utilisation Éthique</strong></h2>
+            <p>Pour garantir une expérience positive et respectueuse pour l'ensemble de la communauté, les utilisateurs s'engagent à utiliser <strong>ConcordiaBot</strong> de manière <strong>responsable</strong> et <strong>respectueuse</strong> des autres membres et des règles générales de Discord.</p>
+            <p>Il est <strong>strictement interdit</strong> de :</p>
+            <ul>
+                <li>Publier du <strong>spam</strong> : tout message répétitif, non pertinent ou ayant pour seul but de saturer le canal.</li>
+                <li>Diffuser de <strong>fausses annonces</strong> : des informations trompeuses, incorrectes ou délibérément erronées.</li>
+                <li>Poster du <strong>contenu illégal</strong> : tout matériel violant les lois en vigueur ou les <a href="https://discord.com/terms" target="_blank" rel="noopener noreferrer"><strong>Conditions d'Utilisation de Discord</strong></a> ainsi que les lignes directrices de la communauté.</li>
+            </ul>
+            <p>En cas d’abus ou de non-respect de ces règles, des sanctions appropriées et proportionnées seront appliquées. Celles-ci peuvent inclure :</p>
+            <ul>
+                <li>La <strong>suppression immédiate</strong> du message ou de l'annonce concernée par l'infraction.</li>
+                <li>Des <strong>sanctions modérées par le staff</strong> du serveur, telles que des avertissements formels, des exclusions temporaires, ou dans les cas graves, une exclusion définitive du serveur.</li>
+            </ul>
+
+            <hr>
+
+            <h2 id="responsabilite-utilisateurs"><strong>4. Responsabilité de l'Utilisateur</strong></h2>
+            <p>Chaque utilisateur est <strong>pleinement responsable du contenu</strong> qu’il publie via <strong>ConcordiaBot</strong>. Cela inclut la véracité, la légalité et le caractère approprié des informations partagées, ainsi que des <strong>conséquences</strong> directes ou indirectes de ses annonces.</p>
+            <p>Le bot s’efforce d’afficher des données exactes et à jour en se basant sur les informations fournies. Cependant, <strong>ConcordiaBot</strong> ne peut garantir une exactitude absolue en toutes circonstances, notamment en raison de la nature dynamique des communications sur Discord.</p>
+
+            <hr>
+
+            <h2 id="support-contact"><strong>5. Support et Assistance</strong></h2>
+            <p>Pour toute question, en cas de bug technique, de problème rencontré lors de l'utilisation, ou pour signaler un comportement inapproprié d'un utilisateur, nous encourageons les membres à contacter l’équipe de support.</p>
+            <p>Les utilisateurs sont invités à utiliser le <strong>salon de tickets officiel</strong> dédié à l'assistance. C'est le moyen le plus efficace pour obtenir de l'aide rapidement et de manière organisée :</p>
+            <p><a href="https://discord.com/channels/1385284067817423028/1385300417310625844" target="_blank" rel="noopener noreferrer"><strong>Accéder au salon de tickets Concordia</strong></a></p>
+
+            <div class="last-updated">
+                <p><strong>Dernière mise à jour : juillet 2025</strong></p>
+            </div>
+        </main>
+
+        <aside class="sidebar-navigation">
+            <h3><strong>Sur cette page</strong></h3>
+            <ul>
+                <li><a href="#presentation"><strong>1. Présentation du Service</strong></a></li>
+                <li><a href="#acces-service"><strong>2. Accès et Disponibilité</strong></a></li>
+                <li><a href="#regles-utilisation"><strong>3. Règles d'Utilisation Éthique</strong></a></li>
+                <li><a href="#responsabilite-utilisateurs"><strong>4. Responsabilité de l'Utilisateur</strong></a></li>
+                <li><a href="#support-contact"><strong>5. Support et Assistance</strong></a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.sidebar-navigation ul li a');
+            const sections = document.querySelectorAll('.content-card h2');
+            const offset = 100; // Offset ajusté pour le header et le padding des titres
+
+            const setActiveLink = () => {
+                let currentActiveSectionId = null;
+                // Itérer du bas vers le haut pour prioriser les sections qui apparaissent en haut de la fenêtre
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    const rect = section.getBoundingClientRect();
+                    // Vérifier si le haut de la section est dans la partie visible de la fenêtre,
+                    // et si la section est au-dessus de l'offset pour être considérée "active".
+                    if (rect.top <= offset && rect.bottom > offset) {
+                        currentActiveSectionId = section.id;
+                        break;
+                    }
+                     // Si on est tout en haut et que la première section est visible
+                    if (window.scrollY < sections[0].offsetTop - offset + 50 && sections[0].id === 'presentation') {
+                        currentActiveSectionId = 'presentation';
+                    }
+                }
+
+                // Fallback: if no section is active, default to the first one if at the top of the page
+                // This handles cases where scroll is between sections or at the very top
+                if (!currentActiveSectionId && window.scrollY < sections[0].offsetTop + sections[0].clientHeight) {
+                    currentActiveSectionId = sections[0].id;
+                }
+
+
+                navLinks.forEach(link => {
+                    const linkTargetId = link.getAttribute('href').substring(1);
+                    if (linkTargetId === currentActiveSectionId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', setActiveLink);
+            // Appeler une fois au chargement pour définir la section initiale
+            setActiveLink();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                        // Défilement fluide avec un offset ajusté
+                        window.scrollTo({
+                            top: targetSection.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
