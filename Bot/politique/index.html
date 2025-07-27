@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité - ConcordiaBot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5b6aff; /* Bleu plus vif */
+            --secondary-color: #ff6a88; /* Rose plus vif */
+            --gradient-start-bg: #e0f2f7; /* Bleu clair subtil */
+            --gradient-end-bg: #cfe9f2; /* Bleu très clair */
+            --header-gradient-start: #5b6aff;
+            --header-gradient-end: #ff6a88;
+            --text-color: #2c3e50; /* Bleu foncé pour le texte */
+            --light-text-color: #34495e; /* Gris-bleu pour le texte secondaire */
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --border-color: #ecf0f1; /* Gris clair */
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Ombre plus douce */
+            --hover-shadow: rgba(0, 0, 0, 0.18);
+            --active-nav-color: #ff6a88;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--gradient-start-bg) 0%, var(--gradient-end-bg) 100%);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(91, 106, 255, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(255, 106, 136, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%);
+            padding: 80px 20px 100px;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease-out;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header-gradient h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2em;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .main-content-wrapper {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: -70px;
+            position: relative;
+            z-index: 3;
+            padding: 0 20px;
+            box-sizing: border-box;
+            gap: 40px; /* Espace entre les deux colonnes */
+        }
+
+        .container {
+            flex-grow: 1;
+            background: var(--card-background);
+            border-radius: 18px;
+            box-shadow: 0 10px 40px var(--shadow-color);
+            padding: 45px;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+            min-width: 0;
+        }
+
+        .side-navigation {
+            position: sticky;
+            top: 100px; /* Distance du haut de l'écran */
+            width: 280px;
+            padding: 25px;
+            background: var(--card-background);
+            border-radius: 18px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+            align-self: flex-start;
+            animation: fadeInRight 1s ease-out 0.6s forwards;
+            opacity: 0;
+            
+            /* Styles pour le défilement interne */
+            max-height: calc(100vh - 120px); /* Hauteur max = hauteur de la fenêtre - espace haut/bas */
+            overflow-y: auto; /* Permet le défilement interne si le contenu dépasse */
+            -ms-overflow-style: none; /* IE et Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        /* Masquer la scrollbar pour WebKit (Chrome, Safari) */
+        .side-navigation::-webkit-scrollbar {
+            display: none;
+        }
+
+        .side-navigation h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4em;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .side-navigation ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-navigation ul li {
+            margin-bottom: 15px;
+        }
+
+        .side-navigation ul li a {
+            display: block;
+            padding: 10px 15px;
+            border-radius: 10px;
+            color: var(--light-text-color);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1; /* S'assure que le texte est au-dessus du pseudo-élément */
+        }
+
+        .side-navigation ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+            z-index: -1;
+        }
+
+        .side-navigation ul li a:hover {
+            color: white;
+            transform: translateX(5px);
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .side-navigation ul li a:hover::before {
+            transform: translateX(0%);
+        }
+
+        .side-navigation ul li a.active {
+            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(5px);
+            pointer-events: none;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-top: 45px;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--border-color);
+            position: relative;
+            transition: color 0.3s ease;
+            scroll-margin-top: 100px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -15px;
+            width: 30px;
+            height: 30px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: -1;
+            transform: scale(0);
+            animation: pulse 1.5s infinite ease-out;
+        }
+
+        h2:hover::before {
+            animation: none;
+            transform: scale(1);
+            opacity: 0.3;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            transition: width 0.3s ease;
+        }
+
+        h2:hover::after {
+            width: 120px;
+        }
+
+        p {
+            margin-bottom: 18px;
+            color: var(--light-text-color);
+        }
+
+        strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 25px;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--light-text-color);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        ul li:hover {
+            transform: translateX(5px);
+            color: var(--text-color);
+        }
+
+        ul li::before {
+            content: '✓';
+            color: var(--secondary-color);
+            font-size: 1.3em;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            font-weight: bold;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+            transform: translateY(-2px);
+        }
+
+        code {
+            background-color: #f2f4f6;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Montserrat', monospace;
+            font-size: 0.95em;
+            color: var(--primary-color);
+            border: 1px solid #e0e0e0;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px dashed var(--border-color);
+            margin: 50px 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0); opacity: 0.2; }
+            50% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(0); opacity: 0.2; }
+        }
+
+        /* Media Queries pour la responsivité */
+        @media (max-width: 1024px) {
+            .main-content-wrapper {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px; /* Réduit l'espace sur mobile */
+            }
+            .side-navigation {
+                position: static;
+                width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
+                order: 2;
+                max-height: none; /* Plus de max-height sur les petits écrans */
+                overflow-y: visible; /* Plus de défilement interne */
+            }
+            .container {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-gradient {
+                padding: 50px 20px 70px;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+            .header-gradient h1 {
+                font-size: 2.5em;
+            }
+            .container {
+                padding: 30px;
+                margin-top: -50px;
+                border-radius: 12px;
+            }
+            h2 {
+                font-size: 1.7em;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+            h2::after {
+                width: 50px;
+            }
+            ul li {
+                padding-left: 25px;
+            }
+            .side-navigation {
+                padding: 20px;
+            }
+            .side-navigation h3 {
+                font-size: 1.2em;
+            }
+            .side-navigation ul li a {
+                font-size: 0.9em;
+                padding: 8px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-gradient h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%;">
+        <div class="header-gradient">
+            <h1>Politique de Confidentialité de ConcordiaBot</h1>
+        </div>
+
+        <div class="main-content-wrapper">
+            <div class="container">
+                <h2 id="collecte-donnees">1. Collecte des données personnelles</h2>
+                <p>ConcordiaBot est conçu pour collecter de manière <strong>automatique</strong> des messages spécifiques postés au sein du serveur Discord Concordia. Nous nous concentrons exclusivement sur les annonces diffusées dans le salon <strong style="color: var(--primary-color);">#📢┃annonces</strong> (identifiant Discord : <code>1398568491405148230</code>).</p>
+                <p>Ces messages sont stockés dans une base de données sécurisée, répartie entre le serveur Discord lui-même et un serveur externe dédié. Cette démarche est strictement menée dans le but de faciliter la recherche et la consultation de ces annonces par l'ensemble des membres de notre communauté.</p>
+                <p>Nous tenons à souligner qu'<strong>aucune autre donnée personnelle</strong>, telle que votre adresse IP, des informations de profil au-delà de celles publiquement visibles sur Discord, ou toute donnée sensible, n'est collectée par ConcordiaBot.</p>
+
+                <hr>
+
+                <h2 id="finalites-utilisation">2. Finalités de la collecte et de l'utilisation des données</h2>
+                <p>Les données que nous recueillons sont utilisées dans des finalités claires et exclusives :</p>
+                <ul>
+                    <li>Faciliter la recherche et l'accès aux annonces publiées par les membres dans le salon dédié.</li>
+                    <li>Contribuer à une meilleure organisation et gestion des informations partagées au sein de la communauté Concordia.</li>
+                </ul>
+                <p>Ces données ne sont en aucun cas exploitées à des fins commerciales, publicitaires, ou pour tout traitement automatisé non conforme aux droits fondamentaux de nos utilisateurs.</p>
+
+                <hr>
+
+                <h2 id="acces-partage">3. Accès, partage et confidentialité</h2>
+                <p>L'accès aux données collectées par ConcordiaBot est <strong>strictement réservé aux membres du serveur Discord Concordia</strong>, et ce, uniquement dans le cadre des fonctionnalités offertes par le bot.</p>
+                <p>Soyez assuré qu'<strong>aucune donnée n'est partagée ou vendue à des tiers externes</strong>, qu'il s'agisse de partenaires, de services publicitaires ou autres entités. La confidentialité de vos annonces et des informations de nos membres est une priorité absolue pour nous.</p>
+
+                <hr>
+
+                <h2 id="stockage-securite">4. Stockage et sécurité des données</h2>
+                <p>Les annonces que nous collectons sont sécurisées au sein d'une base de données robuste, dont le stockage est réparti sur deux environnements distincts : le serveur Discord lui-même et un serveur externe hautement sécurisé.</p>
+                <p>Nous avons mis en place des mesures de sécurité rigoureuses pour protéger ces données contre tout accès non autorisé, toute modification indésirable ou toute suppression accidentelle. Votre confiance est notre engagement.</p>
+
+                <hr>
+
+                <h2 id="droits-utilisateurs">5. Droits des utilisateurs</h2>
+                <p>En tant qu'utilisateur, vous disposez de droits importants concernant vos données :</p>
+                <ul>
+                    <li><strong>Accès</strong> : Vous pouvez consulter librement les annonces que vous avez publiées via ConcordiaBot.</li>
+                    <li><strong>Suppression</strong> : Vous pouvez demander la suppression de vos annonces.</li>
+                </ul>
+                <p>Pour exercer ces droits, nous vous invitons à vous rendre dans le salon <strong style="color: var(--primary-color);">#📢┃mes-annonces</strong> (ID : <code>1398597715885293609</code>), où un système intuitif vous permet de gérer vos annonces publiées.</p>
+                <p>Note : La modification directe des annonces déjà envoyées via Discord n'est pas gérée par ConcordiaBot. Les annonces sont des messages Discord, et leur modification dépend des fonctionnalités natives de Discord pour l'auteur du message.</p>
+
+
+                <hr>
+
+                <h2 id="age-minimum">6. Âge minimum requis</h2>
+                <p>L'utilisation de ConcordiaBot, ainsi que l'accès au serveur Discord, est soumise au respect de l'âge légal minimal requis par Discord dans le pays de l'utilisateur, généralement fixé à <strong>13 ans</strong>. Toute personne n'ayant pas atteint cet âge ne devrait pas utiliser le bot ni rejoindre le serveur Discord.</p>
+
+                <hr>
+
+                <h2 id="cookies-technologies">7. Utilisation de cookies ou technologies similaires</h2>
+                <p>ConcordiaBot, en tant que bot Discord, fonctionne sans collecter ni stocker de cookies ou d'autres technologies de traçage. Votre vie privée en ligne est respectée.</p>
+
+                <hr>
+
+                <h2 id="contact-support">8. Contact et support</h2>
+                <p>Pour toute question relative à notre politique de confidentialité, la gestion de vos données personnelles, ou si vous souhaitez ouvrir un ticket d'assistance, notre équipe est à votre disposition via le salon dédié :</p>
+                <p><a href="https://discord.com/channels/1385284067817423028/1385300417310625844/1385314836510015660" target="_blank" rel="noopener noreferrer">Salon d'assistance Concordia</a></p>
+            </div>
+
+            <div class="side-navigation">
+                <h3>Sur cette page</h3>
+                <ul>
+                    <li><a href="#collecte-donnees">1. Collecte des données</a></li>
+                    <li><a href="#finalites-utilisation">2. Finalités de l'utilisation</a></li>
+                    <li><a href="#acces-partage">3. Accès, partage &amp; confidentialité</a></li>
+                    <li><a href="#stockage-securite">4. Stockage &amp; sécurité</a></li>
+                    <li><a href="#droits-utilisateurs">5. Droits des utilisateurs</a></li>
+                    <li><a href="#age-minimum">6. Âge minimum requis</a></li>
+                    <li><a href="#cookies-technologies">7. Cookies &amp; technologies similaires</a></li>
+                    <li><a href="#contact-support">8. Contact &amp; support</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script pour la navigation fluide et l'activation des liens
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.side-navigation ul li a');
+            const sections = document.querySelectorAll('.container h2');
+
+            // Fonction pour mettre à jour la classe active du lien de navigation
+            const setActiveLink = () => {
+                let currentActiveSectionId = null;
+                // On inverse la boucle pour favoriser la section la plus basse visible à l'écran
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    const rect = section.getBoundingClientRect();
+                    // Si le haut de la section est visible ou qu'elle est déjà passée le milieu de l'écran
+                    // On ajoute un petit décalage (scroll-margin-top)
+                    if (rect.top <= (window.innerHeight / 2) && rect.bottom > 0) {
+                        currentActiveSectionId = section.id;
+                        break; // On a trouvé la section la plus pertinente, on arrête
+                    }
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href').substring(1) === currentActiveSectionId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            };
+
+            // Écoute les événements de scroll pour mettre à jour la classe active
+            window.addEventListener('scroll', setActiveLink);
+            // Appelle une fois au chargement pour définir la section initiale
+            setActiveLink();
+
+            // Gestion du clic sur les liens de navigation pour un scroll fluide
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 90, // Ajuste le décalage pour le header fixe et la marge des titres
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
