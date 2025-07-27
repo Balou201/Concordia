@@ -1,0 +1,337 @@
+/* Variables CSS pour un thème cohérent et facile à gérer */
+:root {
+    --color-primary: #5A67D8; /* Bleu profond, raffiné */
+    --color-primary-hover: #6B7BCC; /* Nuance plus claire au survol */
+    --color-secondary: #4A5568; /* Gris anthracite pour les cartes et sections */
+    --color-background-dark: #1A202C; /* Arrière-plan général */
+    --color-background-light: #2D3748; /* Arrière-plan des conteneurs principaux */
+    --color-text-light: #E2E8F0; /* Texte principal clair */
+    --color-text-muted: #A0AEC0; /* Texte secondaire, plus doux */
+    --border-radius: 8px;
+    --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.2);
+    --box-shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --transition-speed: 0.3s ease;
+}
+
+/* Styles de base et réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover {
+    color: var(--color-primary-hover);
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* En-têtes et sections */
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-text-light);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3.5em;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+h1 span {
+    color: var(--color-primary);
+}
+
+h2 {
+    font-size: 1.8em;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: var(--color-text-muted);
+}
+
+h3 {
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    color: #ffffff; /* Pour les titres de section */
+}
+
+.section-description {
+    font-size: 1.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-padded {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.section-accent {
+    background-color: var(--color-background-light);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Boutons génériques */
+.btn {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: var(--border-radius);
+    font-size: 1.1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed), transform 0.2s ease, box-shadow var(--transition-speed);
+    box-shadow: var(--box-shadow-light);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-dark);
+}
+
+.btn-large {
+    padding: 20px 50px;
+    font-size: 1.3em;
+}
+
+/* Header & Navigation */
+.main-header {
+    width: 100%;
+    background-color: rgba(26, 32, 44, 0.9); /* Fond semi-transparent pour la barre de navigation */
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color var(--transition-speed);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.navbar-brand a {
+    color: #ffffff;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.navbar-nav a {
+    color: var(--color-text-light);
+    font-weight: 600;
+    font-size: 1.05em;
+    padding: 5px 0;
+    position: relative;
+}
+
+.navbar-nav a::after { /* Effet souligné au survol */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width var(--transition-speed);
+}
+
+.navbar-nav a:hover::after,
+.navbar-nav a.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), url('https://source.unsplash.com/random/1920x1080/?abstract,geometric,blue') no-repeat center center/cover;
+    /* Remplace 'https://source.unsplash.com/random/...' par une image de fond pertinente si tu en as une */
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 100px 20px 50px; /* Espace pour le header fixe */
+    position: relative;
+    z-index: 1; /* Pour que le contenu soit au-dessus de l'image de fond */
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.tagline {
+    font-size: 1.4em;
+    color: var(--color-text-muted);
+    margin-bottom: 50px;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--color-secondary);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    text-align: left;
+    box-shadow: var(--box-shadow-light);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    border-left: 5px solid var(--color-primary);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px); /* Effet de soulèvement plus prononcé */
+    box-shadow: var(--box-shadow-dark);
+}
+
+.feature-card h3 {
+    font-size: 1.6em;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-card h3 span {
+    font-size: 1.8em;
+    margin-right: 12px;
+    color: #ffffff;
+}
+
+.feature-card p {
+    font-size: 0.95em;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+}
+
+/* Discord Widget Wrapper */
+.discord-widget-wrapper {
+    margin: 50px auto;
+    max-width: 350px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow-dark);
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--color-background-dark);
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--color-text-muted);
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 15px 0;
+    }
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .navbar-nav {
+        gap: 15px;
+        justify-content: center;
+    }
+    .hero-section {
+        min-height: 60vh;
+        padding-top: 120px;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .tagline {
+        font-size: 1.1em;
+    }
+    .section-padded {
+        padding: 60px 0;
+    }
+    h3 {
+        font-size: 1.8em;
+    }
+    .section-description {
+        font-size: 1em;
+    }
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    .btn {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .btn-large {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+    .discord-widget-wrapper iframe {
+        width: 100%;
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    .navbar-nav {
+        flex-wrap: wrap;
+    }
+}
